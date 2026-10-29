@@ -7,7 +7,7 @@
 
 > **Undergraduate Final Year Dissertation (2026)**  
 > **Author:** Abhay Praseeth — *BSc Computer Science & Artificial Intelligence, Loughborough University*  
-> **Paper:** [Read Full Dissertation PDF](paper/Abhay_Praseeth_Dissertation_2026.pdf)
+> **Paper:** [Read Full Dissertation PDF](paper/dissertation.pdf)
 
 An offline, zero-token, black-box geometric anomaly detection pipeline designed to intercept plausible technical hallucinations in commercial Large Language Models (GPT-4 and Gemini Pro) without auxiliary LLM calls, external search engines, or white-box parameter access.
 
