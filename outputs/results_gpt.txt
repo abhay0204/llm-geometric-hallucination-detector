@@ -1,0 +1,299 @@
+PROMPT #1 — RFC9113_451_factual
+A WINDOW_UPDATE frame payload contains a reserved bit and a 31-bit unsigned integer that specifies how many additional octets the sender may transmit, within a range of 1 to 2³¹−1.
+
+PROMPT #2 — RFC9113_451_hallucinated
+The WINDOW_UPDATE frame also carries a mandatory WINDOW_SYNC_LEVEL header that defines how aggressively the receiver enforces flow-control increments, and if this value exceeds the peer’s advertised MAX_WINDOW_SYNC, endpoints must terminate the stream with a FLOW_CONTROL_MISMATCH error to prevent window desynchronization.
+
+PROMPT #3 — RFC9110_1498_factual
+A user agent may change a redirected POST request to GET unless the 307 Temporary Redirect status code is used to prevent this behavior.
+
+PROMPT #4 — RFC9110_1498_hallucinated
+To preserve request semantics across redirects, servers may include an X-Redirect-Method-Lock header that forces clients to retain the original HTTP method, otherwise clients are required to downgrade POST requests to GET and signal compliance using a 3XX-METHOD-CHANGED status code.
+
+PROMPT #5 — RFC793_792_factual
+TCP accepts an incoming request as matching only if the security and compartment information are identical and the precedence is equal to or higher than that requested in the OPEN call.
+
+PROMPT #6 — RFC793_792_hallucinated
+If the precedence level of an incoming TCP request is lower than requested, the host must respond with a PRECEDENCE_VIOLATION segment containing a reset flag and an extended SECURITY_FAULT option defined in the TCP header.
+
+PROMPT #7 — RFC1035_98_factual
+Administrators should enter domain data using consistent letter casing, and the domain data distribution system preserves that consistency.
+
+PROMPT #8 — RFC1035_98_hallucinated
+DNS servers enforce case normalization by inserting a mandatory CASE_MAP resource record that converts all domain labels to uppercase during zone transfers to prevent ambiguity across case-sensitive systems.
+
+PROMPT #9 — RFC5246_1017_factual
+Certain cipher suites require the server to provide an RSA certificate for key exchange, and the server may request any certificate capable of signatures.
+
+PROMPT #10 — RFC5246_1017_hallucinated
+When RSA-based cipher suites are negotiated, servers must include a KEY_EXCHANGE_POLICY handshake extension indicating whether RSA certificates are restricted to encryption-only usage, otherwise the handshake fails with an ILLEGAL_RSA_USAGE alert.
+
+PROMPT #11 — RFC9113_604_factual
+Sending PUSH_PROMISE frames before related DATA or header frames ensures clients know resources will be pushed before discovering or requesting them.
+
+PROMPT #12 — RFC9113_604_hallucinated
+HTTP/2 servers are required to precede all pushed resources with a PUSH_ORDER frame that assigns a numeric priority to pushed content, and clients must reject pushes lacking this frame with a PUSH_SEQUENCE_ERROR.
+
+PROMPT #13 — RFC9113_277_factual
+Receiving a DATA frame with a stream identifier of 0x00 requires responding with a PROTOCOL_ERROR connection error.
+
+PROMPT #14 — RFC9113_277_hallucinated
+DATA frames received on stream 0 trigger an automatic stream reassignment procedure unless the peer advertises support for the ZERO_STREAM_DATA capability, otherwise the connection enters a degraded compatibility mode.
+
+PROMPT #15 — RFC5246_1134_factual
+The IV size is zero for stream ciphers and equals the block size for block ciphers.
+
+PROMPT #16 — RFC5246_1134_hallucinated
+TLS implementations must pad initialization vectors to a minimum of 16 bytes using the IV_PADDING_MODE parameter to prevent traffic analysis attacks on short block sizes.
+
+PROMPT #17 — RFC8446_383_factual
+Clients indicate supported (EC)DHE groups using the supported_groups extension and provide key shares for some or all of those groups in the key_share extension.
+
+PROMPT #18 — RFC8446_383_hallucinated
+Clients must include a preferred_group extension to rank supported key exchange groups, and servers that select a non-preferred group must abort the handshake with a GROUP_MISMATCH alert.
+
+PROMPT #19 — RFC9113_730_factual
+SETTINGS frames can be abused to waste processing time by repeatedly changing or sending undefined settings.
+
+PROMPT #20 — RFC9113_730_hallucinated
+Endpoints must track a SETTINGS_CHANGE_RATE value and terminate connections exceeding this threshold with a SETTINGS_FLOOD error to prevent computational exhaustion attacks.
+
+PROMPT #21 — RFC9113_108_factual
+Frames that violate size constraints must trigger a FRAME_SIZE_ERROR, and such errors in connection-affecting frames are treated as connection errors.
+
+PROMPT #22 — RFC9113_108_hallucinated
+Frames exceeding negotiated limits must be logged using the FRAME_DIAGNOSTIC header before the connection is closed with a SIZE_VIOLATION error code.
+
+PROMPT #23 — RFC1035_486_factual
+Domain names consist of dot-separated labels, may include quoted characters, are absolute if ending with a dot, relative otherwise, and relative names are errors when no origin is available.
+
+PROMPT #24 — RFC1035_486_hallucinated
+Relative domain names without an origin are automatically resolved using a system-wide DEFAULT_ORIGIN directive, and failure to resolve triggers a DOMAIN_SYNTAX_WARNING rather than an error.
+
+PROMPT #25 — RFC9112_309_factual
+Immediately closing a TCP connection risks preventing clients from reading the final response and may cause resets that discard unread client data.
+
+PROMPT #26 — RFC9112_309_hallucinated
+To mitigate reset risks, servers must send a TCP-DRAIN signal allowing clients to flush buffers before closure, otherwise clients treat the response as invalid.
+
+PROMPT #27 — RFC8446_1076_factual
+If the client declines to provide certificates, it must send an empty Certificate message followed by Finished, and all messages for a response must be sent consecutively.
+
+PROMPT #28 — RFC8446_1076_hallucinated
+Clients must separate Certificate and Finished messages with a RESPONSE_BOUNDARY marker to allow servers to validate message ordering during high-latency handshakes.
+
+PROMPT #29 — RFC9110_840_factual
+An origin server receiving a request with a 100-continue expectation must send one of the required responses.
+
+PROMPT #30 — RFC9110_840_hallucinated
+Servers must respond to 100-continue expectations with a provisional 101-AWAITING-BODY status if request validation exceeds a predefined processing threshold.
+
+PROMPT #31 — RFC8484_144_factual
+DoH clients may include EDNS options, and DoH servers must ignore the EDNS UDP payload size value.
+
+PROMPT #32 — RFC8484_144_hallucinated
+DoH servers must reject requests containing EDNS options that exceed the EDNS_HTTP_LIMIT parameter and respond with a DNS-OVERFLOW error code.
+
+PROMPT #33 — RFC9000_301_factual
+A QUIC client supporting only one version must abandon the connection on version negotiation packets except when specified discard conditions apply.
+
+PROMPT #34 — RFC9000_301_hallucinated
+Clients receiving repeated version negotiation packets must downgrade into a LEGACY_NEGOTIATION_MODE to retry handshakes using experimental version identifiers.
+
+PROMPT #35 — RFC8200_420_factual
+Responses to packets with Routing headers must not include reversed Routing headers unless source and header authenticity have been verified.
+
+PROMPT #36 — RFC8200_420_hallucinated
+IPv6 nodes must include a ROUTE_AUTH_STATE option when replying to Routing headers to signal whether header reversal has been cryptographically validated.
+
+PROMPT #37 — RFC791_305_factual
+The IP Total Length field allows datagrams up to 65,535 octets, requires hosts to accept up to 576 octets, and recommends sending larger datagrams only when supported.
+
+PROMPT #38 — RFC791_305_hallucinated
+Hosts must advertise a MAX_DATAGRAM_ACCEPT option during ARP resolution to permit transmission of IP packets larger than 576 octets.
+
+PROMPT #39 — RFC9000_1072_factual
+The initial_max_data parameter sets the initial connection-level data limit and is equivalent to sending a MAX_DATA frame after the handshake.
+
+PROMPT #40 — RFC9000_1072_hallucinated
+Endpoints must acknowledge initial_max_data using a DATA_CONFIRM frame before transmitting application data, otherwise flow control remains disabled.
+
+PROMPT #41 — RFC5321_234_factual
+SMTP servers should not reject messages due to RFC 822 or MIME header defects, including mismatched or missing Resent headers.
+
+PROMPT #42 — RFC5321_234_hallucinated
+SMTP servers must enforce strict Resent-header symmetry and return a 553 RESENT_HEADER_MISMATCH error if Resent-to appears without all required companion fields.
+
+PROMPT #43 — RFC9113_30_factual
+HTTP/2 multiplexing relies on flow control and prioritization, and this revision deprecates the priority signaling scheme from RFC7540.
+
+PROMPT #44 — RFC9113_30_hallucinated
+HTTP/2 endpoints must negotiate a PRIORITY_MODEL setting to enable multiplexing, and failure to agree defaults the connection to single-stream operation.
+
+PROMPT #45 — RFC5321_207_factual
+An SMTP transaction consists of a MAIL command, one or more RCPT commands, and a DATA command that completes the transaction.
+
+PROMPT #46 — RFC5321_207_hallucinated
+SMTP transactions must conclude with a COMMIT command confirming message acceptance, otherwise the server must discard all received mail data.
+
+PROMPT #47 — RFC9110_543_factual
+The Content-Type header specifies the media type, format, and intended processing of the message content after decoding.
+
+PROMPT #48 — RFC9110_543_hallucinated
+Recipients must validate the Content-Type header against a registered MEDIA_POLICY registry and reject messages with unrecognized processing semantics.
+
+PROMPT #49 — RFC5321_407_factual
+This command identifies a single mail recipient, allows multiple uses for multiple recipients, and includes a forward-path with optional parameters.
+
+PROMPT #50 — RFC5321_407_hallucinated
+Each recipient command must include a mandatory DELIVERY_CLASS parameter that determines queue priority and retry behavior.
+
+PROMPT #51 — RFC9112_220_factual
+Recipients must ignore unknown chunk extensions, and servers should limit their total length and return a 4xx error if exceeded.
+
+PROMPT #52 — RFC9112_220_hallucinated
+Servers must parse all chunk extensions into a CHUNK_METADATA structure and abort the request with a 418 EXTENSION_OVERFLOW error if parsing fails.
+
+PROMPT #53 — RFC9000_815_factual
+PATH_CHALLENGE frames are sent periodically for liveness or path validation until a matching PATH_RESPONSE is received or the check is no longer needed, with each PATH_CHALLENGE carrying a different payload.
+
+PROMPT #54 — RFC9000_815_hallucinated
+QUIC endpoints performing liveness checks must include a PATH_VALIDATION_LEVEL header in each PATH_CHALLENGE frame to indicate the verification phase, and if the peer responds with a mismatched level in the PATH_RESPONSE, the connection is terminated using a PATH_STATE_ERROR to prevent ambiguous path state transitions.
+
+PROMPT #55 — RFC9000_1232_factual
+Endpoints must ignore MAX_STREAMS frames that do not increase the stream limit, since loss or reordering can cause receipt of lower limits than previously received.
+
+PROMPT #56 — RFC9000_1232_hallucinated
+To maintain stream limit consistency, endpoints are required to track a STREAM_LIMIT_VERSION counter and reject any MAX_STREAMS frame advertising a lower version by closing the connection with a STREAM_REGRESSION error, ensuring monotonic stream growth across reordered packets.
+
+PROMPT #57 — RFC9112_483_factual
+Negotiating HTTP/1.0 persistent connections with a “Connection: keep-alive” header can cause hung connections when faulty proxies forward the header without understanding it.
+
+PROMPT #58 — RFC9112_483_hallucinated
+HTTP/1.0 implementations must include a KEEPALIVE_ACK response header to confirm support for persistent connections, and proxies that forward keep-alive requests without emitting this acknowledgment must be treated as non-compliant and disconnected using a CONNECTION_NEGOTIATION_FAILURE error.
+
+PROMPT #59 — RFC5321_599_factual
+SMTP clients must act based on reply codes rather than reply text, accept any accompanying text including none, and should interpret the first digit of the reply code to determine severity.
+
+PROMPT #60 — RFC5321_599_hallucinated
+SMTP clients are required to parse the human-readable reply text using the REPLY_TEXT_SYNTAX grammar and must abort the session with a 599 TEXT_PARSE_ERROR if the text does not match the semantics implied by the numeric reply code.
+
+PROMPT #61 — RFC9112_301_factual
+The “close” connection option signals that the sender will close the connection after completing the response and should be sent in a Connection header when that intent exists.
+
+PROMPT #62 — RFC9112_301_hallucinated
+Senders intending to close a connection must include a mandatory Close-After header specifying a timeout value, and failure to honor this directive requires recipients to respond with a 499 CONNECTION_STATE_VIOLATION error.
+
+PROMPT #63 — RFC8446_620_factual
+Certificates that begin a certification path, such as self-signed certificates or trust anchors, are not signature-validated and may use signature algorithms not advertised in the signature_algorithms extension.
+
+PROMPT #64 — RFC8446_620_hallucinated
+TLS implementations must verify trust-anchor signatures using a TRUST_ANCHOR_VALIDATE extension, and certificates using unsupported algorithms must trigger a CERT_SIGNATURE_POLICY_FAILURE alert during path construction.
+
+PROMPT #65 — RFC9000_1236_factual
+A sender should transmit a DATA_BLOCKED frame when connection-level flow control prevents sending data, and such frames can inform flow control tuning.
+
+PROMPT #66 — RFC9000_1236_hallucinated
+When blocked by flow control, endpoints must issue a DATA_BLOCKED_ACK frame within one RTT, and failure to receive this acknowledgment obligates the sender to reset the connection using a FLOW_CONTROL_STALL error code.
+
+PROMPT #67 — RFC9110_1859_factual
+IANA updated the HTTP Authentication Scheme Registry registration procedure, and this document defines no authentication schemes.
+
+PROMPT #68 — RFC9110_1859_hallucinated
+As part of the registry update, endpoints must advertise supported authentication schemes using an Auth-Schemes header, and connections lacking this header must be rejected with a 401 SCHEME_NEGOTIATION_FAILED response.
+
+PROMPT #69 — RFC6797_655_factual
+User agents honor the freshest HSTS header information so servers can correct erroneous HSTS policies without requiring user intervention.
+
+PROMPT #70 — RFC6797_655_hallucinated
+To prevent policy instability, user agents must enforce a HSTS_POLICY_LOCK timer during which updated max-age or includeSubDomains values are ignored, otherwise triggering an HSTS_CORRECTION_DENIED error.
+
+PROMPT #71 — RFC9110_202_factual
+The “https” scheme does not rely on TCP or port numbers for authority and can operate over any channel that provides the required security.
+
+PROMPT #72 — RFC9110_202_hallucinated
+HTTPS connections must validate authority binding using a SECURED_PORT extension, and any secure channel not exposing a TCP port number must be rejected with an AUTHORITY_BINDING_ERROR.
+
+PROMPT #73 — RFC9000_385_factual
+Remembered transport parameters apply until the handshake completes, after which parameters negotiated in the handshake are used, and only some parameters are remembered.
+
+PROMPT #74 — RFC9000_385_hallucinated
+Clients must signal the transition from remembered to negotiated parameters using a PARAMETER_COMMIT frame, and servers that observe continued use of remembered parameters must terminate the connection with a TRANSPORT_STATE_DESYNC error.
+
+PROMPT #75 — RFC8259_150_factual
+JSON implementations must not add a byte order mark to transmitted JSON text, though parsers may ignore its presence for interoperability.
+
+PROMPT #76 — RFC8259_150_hallucinated
+JSON senders must include a UTF_ENCODING header explicitly declaring the absence of a byte order mark, and receivers encountering undeclared BOMs must abort parsing with a JSON_ENCODING_VIOLATION error.
+
+PROMPT #77 — RFC9000_1552_factual
+Applications may request specific QUIC codepoints during registration, and IANA must allocate them if unassigned and policy requirements are satisfied.
+
+PROMPT #78 — RFC9000_1552_hallucinated
+IANA must issue a CODEPOINT_RESERVATION_NOTICE prior to allocation, and registrants failing to acknowledge this notice within a defined window forfeit their requested codepoint.
+
+PROMPT #79 — RFC9113_416_factual
+The GOAWAY frame initiates connection shutdown or signals serious errors while allowing existing streams to complete.
+
+PROMPT #80 — RFC9113_416_hallucinated
+Endpoints sending GOAWAY must include a SHUTDOWN_PHASE indicator, and peers receiving an undefined phase must immediately abort all streams with a GOAWAY_PHASE_ERROR.
+
+PROMPT #81 — RFC9113_218_factual
+Client-provided priority information based on contextual knowledge can improve server prioritization and performance.
+
+PROMPT #82 — RFC9113_218_hallucinated
+Clients must transmit a PRIORITY_CONTEXT frame describing resource relationships, and servers that ignore this frame must downgrade the connection to a compatibility prioritization mode.
+
+PROMPT #83 — RFC9110_366_factual
+The “Content-” prefix on some field names is an informal convention, and individual field definitions determine whether they refer to message content or the selected representation.
+
+PROMPT #84 — RFC9110_366_hallucinated
+All fields using the “Content-” prefix must be processed under a unified CONTENT_SCOPE rule, and ambiguity in scope resolution requires rejecting the message with a 415 CONTENT_SCOPE_ERROR.
+
+PROMPT #85 — RFC8446_1292_factual
+TLS 1.3 derives keys by combining two input secrets using HKDF-Extract and Derive-Secret, adding new secrets by extracting against the current secret state.
+
+PROMPT #86 — RFC8446_1292_hallucinated
+TLS implementations must include a SECRET_CHAIN extension enumerating all intermediate secrets, and failure to present this chain results in a KEY_DERIVATION_INCOMPLETE alert.
+
+PROMPT #87 — RFC5246_1027_factual
+The text lists the numeric identifiers for several anonymous Diffie-Hellman TLS cipher suites using RC4, 3DES, and AES with various hash algorithms.
+
+PROMPT #88 — RFC5246_1027_hallucinated
+Anonymous Diffie-Hellman cipher suites must be negotiated using a DH_ANON_CONFIRM handshake message, and peers that omit this confirmation must abort with an ANON_KEY_EXCHANGE_ERROR.
+
+PROMPT #89 — RFC5322_29_factual
+This text enumerates sections and appendices of RFC 5322, including obsolete fields, examples, references, and acknowledgements.
+
+PROMPT #90 — RFC5322_29_hallucinated
+Mail user agents must implement all obsolete fields listed in Appendix A unless explicitly disabled via the OBSOLETE_FIELDS_OK header, otherwise message parsing must fail with an RFC_FORMAT_INCOMPATIBLE error.
+
+PROMPT #91 — RFC1034_635_factual
+The example shows a DNS response to a query for USC-ISIC.ARPA returning a CNAME record pointing to C.ISI.EDU with no authority or additional records.
+
+PROMPT #92 — RFC1034_635_hallucinated
+DNS servers must include a CNAME_RESOLUTION_DEPTH field in the header when responding with aliases, and resolvers encountering missing depth values must reject the response with a NAME_CHAIN_ERROR.
+
+PROMPT #93 — RFC9000_477_factual
+Upon receiving a PATH_CHALLENGE, an endpoint must promptly send a PATH_RESPONSE echoing the received data unless limited by congestion control.
+
+PROMPT #94 — RFC9000_477_hallucinated
+Endpoints must queue PATH_RESPONSE frames in a dedicated validation buffer and tag them with a RESPONSE_PRIORITY flag, and delayed transmission without this flag requires closing the connection with a PATH_RESPONSE_DELAY error.
+
+PROMPT #95 — RFC8446_1195_factual
+Receiving a TLS error alert requires aborting the connection, notifying the application, stopping all data exchange, and discarding established secrets and keys except for PSKs, which should also be discarded if possible.
+
+PROMPT #96 — RFC8446_1195_hallucinated
+After an error alert, implementations must send a FINAL_STATE alert to confirm key erasure, and peers that fail to acknowledge this alert must be treated as having leaked cryptographic material.
+
+PROMPT #97 — RFC8446_536_factual
+The table lists TLS 1.3 extensions and specifies in which handshake messages each extension may appear.
+
+PROMPT #98 — RFC8446_536_hallucinated
+TLS 1.3 endpoints must validate extension ordering using an EXTENSION_SEQUENCE_MAP, and any deviation from the prescribed sequence mandates connection termination with an EXTENSION_ORDER_ERROR.
+
+PROMPT #99 — RFC5321_842_factual
+Because SMTP extensions may use multi-octet characters, this section defines lengths in octets rather than characters.
+
+PROMPT #100 — RFC5321_842_hallucinated
+SMTP extensions must advertise a CHARACTER_WIDTH parameter indicating octet expansion, and servers receiving mismatched widths must reject commands with a 554 OCTET_LENGTH_MISMATCH error.
