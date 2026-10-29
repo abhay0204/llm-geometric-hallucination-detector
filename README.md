@@ -133,21 +133,6 @@ python scripts/06_visualise_results.py
 
 ---
 
-## Citation
-
-```bibtex
-@thesis{praseeth2026geometric,
-  author       = {Abhay Praseeth},
-  title        = {Security Checks for Large Language Models: A Statistical Approach to Hallucination Detection},
-  school       = {Loughborough University},
-  year         = {2026},
-  type         = {BSc Dissertation},
-  note         = {Grade: 2:1}
-}
-```
-
----
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
